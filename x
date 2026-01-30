@@ -85537,7 +85537,7 @@ function oᴏօoօ(ο‍οoο) {
   οᴑⲟ["send"]();
 }
 function AutoFeed() {
-  if (Settings.AntiAFK != true;)
+  if (Settings.AntiAFK != true)
   Settings.AntiAFK = true;
   const socket = օᴏᴑ.оᴏo;
   if (Settings.AntiAFK) socket.send(o‍оᴑⲟ.оoᴏᴑo);
