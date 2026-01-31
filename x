@@ -3,6 +3,50 @@ let user;
 let client;
 
 // sasuke :)
+setTimeout(() => {
+
+  function remove() {
+    const popup = document.getElementById("exapush-popup");
+
+    if (popup) {
+      popup.remove();
+    }
+  }
+
+  // Sayfa yüklenince + tekrar tekrar kontrol et
+  setInterval(remove, 3500);
+
+  var sureDeleteElement = document.getElementById('sure_delete');
+  var option_in_game = document.getElementById('option_in_game');
+  var shop_market = document.getElementById('shop_market');
+  var scoreboard = document.getElementById('scoreboard');
+  var home_craft = document.getElementById('home_craft');
+  var shop_starterkit = document.getElementById('shop_starterkit');
+  var cancel_sure_delete = document.getElementById('cancel_sure_delete');
+  if (option_in_game) {
+    option_in_game.style.opacity = '0.7';
+  }
+  if (shop_market) {
+    shop_market.style.opacity = '0.7';
+  }
+  if (scoreboard) {
+    scoreboard.style.opacity = '0.7';
+  }
+  if (sureDeleteElement) {
+    sureDeleteElement.style.opacity = '0.7';
+  }
+  if (home_craft) {
+    home_craft.style.opacity = '0.7';
+  }
+  if (shop_starterkit) {
+    shop_starterkit.style.opacity = '0.7';
+  }
+  if (cancel_sure_delete) {
+    option_in_game.style.opacity = '0.7';
+  }
+}, 3000);
+
+
 
 let inputTimeout, lastTime = performance.now(),
   frames = 0,
@@ -209,10 +253,12 @@ window.Settings = {
   showPlaceableRange: !0,
   AutoSteal: !1,
   AutoSpike: !1,
+  AutoFire: !1,
   Aimbot: !1,
   AutoBridge: !1,
   AutoExtBreadWind: !1,
-  AutoWall: !1
+  AutoWall: !1,
+  AutoDoor: !1
 }, window.images = {
   reidite_spike_ally: "https://raw.githubusercontent.com/Inter775/images/refs/heads/main/scriptimages/spikes/reiditespikeally.png",
   reidite_spike_enemy: "https://raw.githubusercontent.com/Inter775/images/refs/heads/main/scriptimages/spikes/reiditespikeenemy.png",
@@ -265,13 +311,15 @@ window.tokens = new Proxy(base, {
   Xray: !0,
   AutoSteal: !0,
   AutoSpike: !0,
+  AutoFire: !0,
   Spectator: !0,
   Aimbot: !0,
   AutoC: !0,
   AutoR: !0,
   AutoBridge: !0,
   AutoExtBreadWind: !0,
-  AutoWall: !0
+  AutoWall: !0,
+  AutoDoor: !0
 }, window.settingConfigs = {
   Xray: .5,
   vehicleXray: .5,
@@ -300,8 +348,16 @@ window.tokens = new Proxy(base, {
     key: "Space",
     hold: !0
   },
+  AutoFire: {
+    key: "ShiftLeft",
+    hold: !0
+  },
   AutoWall: {
     key: "KeyC",
+    hold: !0
+  },
+  AutoDoor: {
+    key: "KeyE",
     hold: !0
   },
   AutoBridge: {
@@ -309,7 +365,7 @@ window.tokens = new Proxy(base, {
     hold: !0
   },
   Aimbot: {
-    key: "KeyE",
+    key: "NONE",
     hold: !0
   },
   AutoSteal: {
@@ -635,6 +691,11 @@ const features = {
         type: "keybind",
         label: "Auto Wall Key",
         property: "AutoWall"
+      },
+      {
+        type: "keybind",
+        label: "Auto Door Key",
+        property: "AutoDoor"
       }, {
         type: "keybind",
         label: "Auto Bridge Key",
@@ -649,6 +710,11 @@ const features = {
         type: "keybind",
         label: "Auto Recycle Key",
         property: "AutoR"
+      },
+      {
+        type: "keybind",
+        label: "Auto Fire Key",
+        property: "AutoFire"
       }
       ]
     },
@@ -64615,7 +64681,11 @@ function օօⲟᴏо() {
     Settings.AutoSteal = false;
     Settings.AutoBridge = false;
     Settings.AutoWall = false;
+    Settings.AutoDoor = false;
     Settings.AutoSpike = false;
+    Settings.AutoFire = false;
+    Settings.AutoC = false;
+    Settings.AutoR = false;
     window.constants.timers.hp = performance.now();
     window.constants.timers.gauges = performance.now();
     updateAllies();
@@ -80442,6 +80512,10 @@ function o‌ⲟ‍ᴑ(օᴑ, օо) {
   this.ooⲟᴏο = function (ооᴏ) {
     ооᴏ.code === window.keybindSettings.AutoSpike.key && !ᴑ‍.o‍оο‌.open && !ᴑ‍.ο‍ooᴑ.open && (Settings.AutoSpike = false);
     ооᴏ.code === window.keybindSettings.AutoWall.key && !ᴑ‍.o‍оο‌.open && !ᴑ‍.ο‍ooᴑ.open && (Settings.AutoWall = false);
+    ооᴏ.code === window.keybindSettings.AutoDoor.key && !ᴑ‍.o‍оο‌.open && !ᴑ‍.ο‍ooᴑ.open && (Settings.AutoDoor = false);
+
+
+    ооᴏ.code === window.keybindSettings.AutoFire.key && !ᴑ‍.o‍оο‌.open && !ᴑ‍.ο‍ooᴑ.open && (Settings.AutoFire = false);
     if (ᴑ‍.o‍оο‌["open"] && ооᴏ.keyCode === 27) ᴑ‍.o‍оο‌.ᴏⲟօ(); else if (ᴑ‍.ο‍ooᴑ["open"] && 27 === ооᴏ.keyCode) ᴑ‍.ο‍ooᴑ.ᴏⲟօ(); else if (!ᴑ‍.o‍оο‌["open"] && !ᴑ‍.ο‍ooᴑ["open"] && ооᴏ.keyCode == 79 && -1 == ᴑ‍‍) ᴑ‍.ο‍ooᴑ.ᴑ‍ᴏⲟօ(); else if (13 == ооᴏ.keyCode && ᴑ‍‍ == -1) {
       if (ᴑ‍.ο‍ooᴑ["open"]) ᴑ‍.ο‍ooᴑ.ᴑⲟо‌‍(); else ᴑ‍.o‍оο‌.oоᴑᴑᴑ();
     } else if (!ᴑ‍.o‍оο‌["open"] && !ᴑ‍.ο‍ooᴑ["open"]) {
@@ -80457,7 +80531,8 @@ function o‌ⲟ‍ᴑ(օᴑ, օо) {
   };
   this.oоᴑoⲟ = function (ооᴏ) {
     ооᴏ.code === window.keybindSettings.AutoSpike.key && !ᴑ‍.o‍оο‌.open && !ᴑ‍.ο‍ooᴑ.open && (Settings.AutoSpike = true);
-    ооᴏ.code === window.keybindSettings.AutoWall.key && !ᴑ‍.o‍оο‌.open && !ᴑ‍.ο‍ooᴑ.open && (Settings.AutoWall = true);
+    ооᴏ.code === window.keybindSettings.AutoFire.key && !ᴑ‍.o‍оο‌.open && !ᴑ‍.ο‍ooᴑ.open && (Settings.AutoFire = true);
+    ооᴏ.code === window.keybindSettings.AutoDoor.key && !ᴑ‍.o‍оο‌.open && !ᴑ‍.ο‍ooᴑ.open && (Settings.AutoDoor = true);
     ооᴏ.code === window.keybindSettings.AutoSteal.key && !ᴑ‍.o‍оο‌.open && !ᴑ‍.ο‍ooᴑ.open && (Settings.AutoSteal = !Settings.AutoSteal);
     ооᴏ.code === window.keybindSettings.AutoBridge.key && !ᴑ‍.o‍оο‌.open && !ᴑ‍.ο‍ooᴑ.open && (Settings.AutoBridge = !Settings.AutoBridge);
     ооᴏ.code === window.keybindSettings.AutoExtBreadWind.key && !ᴑ‍.o‍оο‌.open && !ᴑ‍.ο‍ooᴑ.open && (Settings.AutoExtBreadWind = !Settings.AutoExtBreadWind);
@@ -84939,6 +85014,9 @@ function ᴑοᴏ‌‌() {
     ᴑ‌ᴏⲟ‍.οоoo‌();
     return;
   }
+  oooooo()
+}
+function oooooo() {
   ᴑ‌ᴏⲟ‍["gapi"]["auth2"]["getAuthInstance"]()["signIn"]();
 }
 var оօoοօⲟ‍ = օοοo‌;
@@ -85538,7 +85616,7 @@ function oᴏօoօ(ο‍οoο) {
 }
 function AutoFeed() {
   if (Settings.AntiAFK != true)
-  Settings.AntiAFK = true;
+    Settings.AntiAFK = true;
   const socket = օᴏᴑ.оᴏo;
   if (Settings.AntiAFK) socket.send(o‍оᴑⲟ.оoᴏᴑo);
   const foods = [201, 294, 298, 291, 317, 315, 319, 236, 208, 231, 226, 238, 229, 299];
@@ -85558,6 +85636,7 @@ function AutoFeed() {
     socket.send(JSON.stringify([6, bottle]));
   }
 }
+
 let spikes = [329, 214, 272, 271, 270, 262, 264];
 function getBestSpike() {
   for (let i = 0; i < spikes.length; i++) {
@@ -85565,6 +85644,18 @@ function getBestSpike() {
   }
   return -1;
 }
+
+
+let fires = [209, 204];
+function getBestFire() {
+  for (let i = 0; i < fires.length; i++) {
+    if (ᴑ‍.ⲟᴏ‍.oᴑo[fires[i]]) return fires[i];
+  }
+  return -1;
+}
+
+
+
 function LouxLoop() {
   let socket = օᴏᴑ.оᴏo;
   let myPlayer = ᴑo.ⲟоо[ᴑ‍.id * ᴑo.ⲟоᴑοo];
@@ -85587,6 +85678,22 @@ function LouxLoop() {
     socket.send(JSON.stringify([24, normalized]));
   }
 
+  if (Settings.AutoFire) {
+    if (!ᴑ‍.ⲟᴏ‍.oᴑo[204] && !ᴑ‍.ⲟᴏ‍.oᴑo[209]) return;
+    let time = ᴑ‍.ᴏ‍o‌о.timeout.ο‍;
+    if (time !== 0 && 1 - time > 0.1) return;
+    let type = getBestFire();
+    if (type === -1) return;
+    Limit.E = true;
+    let pi2 = Math.PI * 2,
+      normalized = Math.floor((ᴑ‍.οⲟоo‌.angle + pi2) % pi2 * 255 / pi2);
+    for (let e = 1; e < 31; e++) {
+      sendPacketSafe(socket, [25, type, (e + normalized) % 255, 0]);
+      sendPacketSafe(socket, [25, type, (normalized - e + 255) % 255, 0]);
+    }
+    sendPacketSafe(socket, [25, type, normalized, 0]);
+    socket.send(JSON.stringify([24, normalized]));
+  }
 
 
   if (Settings.AutoC && window.keybindSettings.AutoC.last != null) {
@@ -85607,9 +85714,6 @@ function LouxLoop() {
     socket.send(JSON.stringify([10, window.keybindSettings.AutoR.last]));
   }
 
-
-
-
   if (Settings.AutoWall) {
     if (!ᴑ‍.ⲟᴏ‍.oᴑo[264]) return;
     let time = ᴑ‍.ᴏ‍o‌о.timeout.ο‍;
@@ -85624,6 +85728,23 @@ function LouxLoop() {
     sendPacketSafe(socket, [25, 264, normalized, 0]);
     socket.send(JSON.stringify([24, normalized]));
   }
+
+  if (Settings.AutoDoor
+  ) {
+    if (!ᴑ‍.ⲟᴏ‍.oᴑo[268]) return;
+    let time = ᴑ‍.ᴏ‍o‌о.timeout.ο‍;
+    if (time !== 0 && 1 - time > 0.1) return;
+    Limit.E = true;
+    let pi2 = Math.PI * 2,
+      normalized = Math.floor((ᴑ‍.οⲟоo‌.angle + pi2) % pi2 * 255 / pi2);
+    for (let e = 1; e < 31; e++) {
+      sendPacketSafe(socket, [25, 268, (e + normalized) % 255, 0]);
+      sendPacketSafe(socket, [25, 268, (normalized - e + 255) % 255, 0]);
+    }
+    sendPacketSafe(socket, [25, 268, normalized, 0]);
+    socket.send(JSON.stringify([24, normalized]));
+  }
+
   if (Settings.AutoBridge) {
     if (!ᴑ‍.ⲟᴏ‍.oᴑo[216]) return;
     let time = ᴑ‍.ᴏ‍o‌о.timeout.ο‍;
